@@ -19,6 +19,9 @@ public class Produtos {
     @Column(nullable = false)
     private String descricao;
 
+    @Column(nullable = false)
+    private String dimensoes;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "produtos_id")
     private List<Estoque> estoque;
@@ -61,5 +64,13 @@ public class Produtos {
 
     public void setEstoque(List<Estoque> estoque) {
         this.estoque = estoque;
+    }
+
+    public String getDimensoes() {
+        return dimensoes;
+    }
+
+    public void setDimensoes(String dimensoes) {
+        this.dimensoes = dimensoes;
     }
 }

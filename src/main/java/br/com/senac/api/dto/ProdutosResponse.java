@@ -6,6 +6,8 @@ public class ProdutosResponse {
     private String nome;
     private String descricao;
 
+    private String dimensoes;
+
     public Long getId() {
         return id;
     }
@@ -36,5 +38,13 @@ public class ProdutosResponse {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getDimensoes() {
+        return dimensoes;
+    }
+
+    public void setDimensoes(String dimensoes) {
+        this.dimensoes = dimensoes;
     }
 }

@@ -1,5 +1,7 @@
 package br.com.senac.api.dto;
 
+import jakarta.persistence.Column;
+
 public class LojasRequest {
     private Long id;
 
@@ -8,6 +10,8 @@ public class LojasRequest {
     private String cnpj;
 
     private String responsavel;
+
+    private String razaoSocial;
 
     public Long getId() {
         return id;
@@ -39,5 +43,13 @@ public class LojasRequest {
 
     public void setResponsavel(String responsavel) {
         this.responsavel = responsavel;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
     }
 }

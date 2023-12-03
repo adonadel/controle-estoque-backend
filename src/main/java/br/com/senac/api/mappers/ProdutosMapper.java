@@ -13,6 +13,7 @@ public class ProdutosMapper {
         out.setId(produto.getId());
         out.setNome(produto.getNome());
         out.setCodigoEan(produto.getCodigoEan());
+        out.setDimensoes(produto.getDimensoes());
         out.setDescricao(produto.getDescricao());
 
         return out;
@@ -24,6 +25,7 @@ public class ProdutosMapper {
 
         out.setNome(produto.getNome());
         out.setCodigoEan(produto.getCodigoEan());
+        out.setDimensoes(produto.getDimensoes());
         out.setDescricao(produto.getDescricao());
         out.setId(produto.getId());
 
