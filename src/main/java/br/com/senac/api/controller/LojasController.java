@@ -57,6 +57,7 @@ public class LojasController {
         Lojas retorno = lojasRepository.findById(id).map(record -> {
             record.setNome(loja.getNome());
             record.setCnpj(loja.getCnpj());
+            record.setRazaoSocial(loja.getRazaoSocial());
             record.setResponsavel(loja.getResponsavel());
             return lojasRepository.save(record);
         }).get();

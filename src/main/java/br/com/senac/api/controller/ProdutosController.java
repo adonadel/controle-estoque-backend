@@ -54,6 +54,7 @@ public class ProdutosController {
         Produtos retorno = produtosRepository.findById(id).map(record -> {
             record.setNome(produto.getNome());
             record.setDescricao(produto.getDescricao());
+            record.setDimensoes(produto.getDimensoes());
             record.setCodigoEan(produto.getCodigoEan());
             return produtosRepository.save(record);
         }).get();

@@ -9,6 +9,8 @@ public class LojasResponse {
 
     private String responsavel;
 
+    private String razaoSocial;
+
     public Long getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class LojasResponse {
 
     public void setResponsavel(String responsavel) {
         this.responsavel = responsavel;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
     }
 }
