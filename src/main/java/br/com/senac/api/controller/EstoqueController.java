@@ -40,7 +40,7 @@ public class EstoqueController {
         return ResponseEntity.status(HttpStatus.CREATED).body(EstoqueMapper.estoqueToEstoqueResponse(retorno));
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<EstoqueResponse>atualizarEstoque(@PathVariable Long id, @RequestBody EstoqueRequest estoque)
     {
         Estoque retorno = estoqueRepository.findById(id).map(record -> {
