@@ -13,6 +13,8 @@ public class LojasRequest {
 
     private String razaoSocial;
 
+    private String endereco;
+
     public Long getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class LojasRequest {
 
     public void setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 }
