@@ -14,6 +14,7 @@ public class LojasMapper {
         out.setNome(loja.getNome());
         out.setResponsavel(loja.getResponsavel());
         out.setRazaoSocial(loja.getRazaoSocial());
+        out.setEndereco(loja.getEndereco());
         out.setCnpj(loja.getCnpj());
 
         return out;
@@ -26,6 +27,7 @@ public class LojasMapper {
         out.setNome(loja.getNome());
         out.setResponsavel(loja.getResponsavel());
         out.setRazaoSocial(loja.getRazaoSocial());
+        out.setEndereco(loja.getEndereco());
         out.setCnpj(loja.getCnpj());
         out.setId(loja.getId());
 

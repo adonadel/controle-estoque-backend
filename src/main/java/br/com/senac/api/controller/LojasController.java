@@ -58,6 +58,7 @@ public class LojasController {
             record.setNome(loja.getNome());
             record.setCnpj(loja.getCnpj());
             record.setRazaoSocial(loja.getRazaoSocial());
+            record.setEndereco(loja.getEndereco());
             record.setResponsavel(loja.getResponsavel());
             return lojasRepository.save(record);
         }).get();

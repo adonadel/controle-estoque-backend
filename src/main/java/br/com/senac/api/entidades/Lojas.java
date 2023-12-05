@@ -22,6 +22,9 @@ public class Lojas {
     @Column(nullable = false)
     private String razaoSocial;
 
+    @Column(nullable = false)
+    private String endereco;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "lojas_id")
     private List<Estoque> estoque;
@@ -72,5 +75,13 @@ public class Lojas {
 
     public void setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 }

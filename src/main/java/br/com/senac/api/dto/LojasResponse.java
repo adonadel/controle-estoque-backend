@@ -11,6 +11,8 @@ public class LojasResponse {
 
     private String razaoSocial;
 
+    private String endereco;
+
     public Long getId() {
         return id;
     }
@@ -49,5 +51,13 @@ public class LojasResponse {
 
     public void setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 }
