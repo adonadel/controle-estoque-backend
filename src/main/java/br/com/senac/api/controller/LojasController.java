@@ -20,6 +20,7 @@ public class LojasController {
     private LojasRepository lojasRepository;
 
     @GetMapping("/")
+    @CrossOrigin
     public ResponseEntity<List<LojasResponse>> carregarLojas()
     {
         List<Lojas> retorno = lojasRepository.findAll();
