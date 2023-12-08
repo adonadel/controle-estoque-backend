@@ -20,6 +20,7 @@ public class ProdutosController {
     private ProdutosRepository produtosRepository;
 
     @GetMapping("/")
+    @CrossOrigin
     public ResponseEntity<List<ProdutosResponse>> carregarProdutos()
     {
         List<Produtos> retorno = produtosRepository.findAll();
@@ -33,6 +34,7 @@ public class ProdutosController {
     }
 
     @PostMapping("/")
+    @CrossOrigin
     public ResponseEntity<ProdutosResponse> criarProduto(@RequestBody ProdutosRequest produto)
     {
         Produtos retorno = produtosRepository.save(ProdutosMapper.produtosRequestToProdutos(produto));
@@ -41,6 +43,7 @@ public class ProdutosController {
     }
 
     @DeleteMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<Void> deletarProduto(@PathVariable Long id)
     {
         produtosRepository.deleteById(id);
@@ -49,6 +52,7 @@ public class ProdutosController {
     }
 
     @PutMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<ProdutosResponse> atualizarProduto(@PathVariable Long id, @RequestBody ProdutosRequest produto)
     {
         Produtos retorno = produtosRepository.findById(id).map(record -> {
@@ -63,6 +67,7 @@ public class ProdutosController {
     }
 
     @GetMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<ProdutosResponse> carregarProdutoById(@PathVariable Long id)
     {
         Produtos produto = produtosRepository.findById(id).get();
