@@ -20,6 +20,7 @@ public class EstoqueController {
     private EstoqueRepository estoqueRepository;
 
     @GetMapping("/")
+    @CrossOrigin
     public ResponseEntity<List<EstoqueResponse>> carregarEstoque()
     {
         List<Estoque> retorno = estoqueRepository.findAll();
@@ -33,6 +34,7 @@ public class EstoqueController {
     }
 
     @PostMapping("/")
+    @CrossOrigin
     public ResponseEntity<EstoqueResponse> criarEstoque(@RequestBody EstoqueRequest estoque)
     {
         Estoque retorno = estoqueRepository.save(EstoqueMapper.estoqueRequestToEstoque(estoque));
@@ -41,6 +43,7 @@ public class EstoqueController {
     }
 
     @PutMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<EstoqueResponse>atualizarEstoque(@PathVariable Long id, @RequestBody EstoqueRequest estoque)
     {
         Estoque retorno = estoqueRepository.findById(id).map(record -> {
@@ -52,6 +55,7 @@ public class EstoqueController {
     }
 
     @DeleteMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<Void> deletarEstoque(@PathVariable Long id)
     {
         estoqueRepository.deleteById(id);
@@ -60,6 +64,7 @@ public class EstoqueController {
     }
 
     @GetMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<EstoqueResponse> carregarEstoqueById(@PathVariable Long id)
     {
         Estoque estoque = estoqueRepository.findById(id).get();
