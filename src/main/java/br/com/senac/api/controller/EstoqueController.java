@@ -2,9 +2,14 @@ package br.com.senac.api.controller;
 
 import br.com.senac.api.dto.EstoqueRequest;
 import br.com.senac.api.dto.EstoqueResponse;
+import br.com.senac.api.dto.MovimentacaoEstoqueResponse;
 import br.com.senac.api.entidades.Estoque;
+import br.com.senac.api.entidades.MovimentacaoEstoque;
 import br.com.senac.api.mappers.EstoqueMapper;
+import br.com.senac.api.mappers.MovimentacaoEstoqueMapper;
 import br.com.senac.api.repositorios.EstoqueRepository;
+import br.com.senac.api.repositorios.MovimentacaoEstoqueRepository;
+import br.com.senac.api.utils.TipoMovimentacaoEstoque;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +23,8 @@ import java.util.List;
 public class EstoqueController {
     @Autowired
     private EstoqueRepository estoqueRepository;
+    @Autowired
+    private MovimentacaoEstoqueRepository movimentacaoEstoqueRepository;
 
     @GetMapping("/")
     @CrossOrigin
@@ -72,5 +79,57 @@ public class EstoqueController {
         EstoqueResponse out = EstoqueMapper.estoqueToEstoqueResponse(estoque);
 
         return ResponseEntity.ok().body(out);
+    }
+
+    @PostMapping("/{id}/entrada")
+    @CrossOrigin
+    public ResponseEntity<MovimentacaoEstoqueResponse> entradaEstoque(@PathVariable Long id, @RequestBody Estoque estoqueBody)
+    {
+        if (estoqueBody.getQuantidade() < 0) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+        Estoque estoque = estoqueRepository.findById(id).get();
+
+        Long quantidadeAtual = estoque.getQuantidade();
+
+        estoque.setQuantidade(Long.sum(quantidadeAtual, estoqueBody.getQuantidade()));
+
+        estoqueRepository.save(estoque);
+
+        MovimentacaoEstoque movimentacaoEstoque = new MovimentacaoEstoque();
+        movimentacaoEstoque.setEstoque(estoque);
+        movimentacaoEstoque.setTipo(TipoMovimentacaoEstoque.ENTRADA);
+        movimentacaoEstoque.setQuantidade(estoqueBody.getQuantidade());
+
+        MovimentacaoEstoque retorno = movimentacaoEstoqueRepository.save(movimentacaoEstoque);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(MovimentacaoEstoqueMapper.movimentacaoEstoqueToMovimentacaoEstoqueResponse(retorno));
+    }
+
+    @PostMapping("/{id}/saida")
+    @CrossOrigin
+    public ResponseEntity<MovimentacaoEstoqueResponse> saidaEstoque(@PathVariable Long id, @RequestBody Estoque estoqueBody)
+    {
+        Estoque estoque = estoqueRepository.findById(id).get();
+
+        Long quantidadeAtual = estoque.getQuantidade();
+
+        if (estoqueBody.getQuantidade() > quantidadeAtual || estoqueBody.getQuantidade() < 0) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+        estoque.setQuantidade(quantidadeAtual - estoqueBody.getQuantidade());
+
+        estoqueRepository.save(estoque);
+
+        MovimentacaoEstoque movimentacaoEstoque = new MovimentacaoEstoque();
+        movimentacaoEstoque.setEstoque(estoque);
+        movimentacaoEstoque.setTipo(TipoMovimentacaoEstoque.SAIDA);
+        movimentacaoEstoque.setQuantidade(estoqueBody.getQuantidade());
+
+        MovimentacaoEstoque retorno = movimentacaoEstoqueRepository.save(movimentacaoEstoque);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(MovimentacaoEstoqueMapper.movimentacaoEstoqueToMovimentacaoEstoqueResponse(retorno));
     }
 }
