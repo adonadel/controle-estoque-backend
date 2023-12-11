@@ -153,4 +153,18 @@ public class EstoqueController {
 
         return ResponseEntity.ok().body(out);
     }
+
+    @GetMapping("/movimentacoes")
+    @CrossOrigin
+    public ResponseEntity<List<MovimentacaoEstoqueResponse>> carregarMovimentacaoEstoqueById()
+    {
+        List<MovimentacaoEstoque> retorno = movimentacaoEstoqueRepository.findAll();
+
+        List<MovimentacaoEstoqueResponse> out = retorno
+                .stream()
+                .map(MovimentacaoEstoqueMapper:: movimentacaoEstoqueToMovimentacaoEstoqueResponse)
+                .toList();
+
+        return ResponseEntity.ok().body(out);
+    }
 }
