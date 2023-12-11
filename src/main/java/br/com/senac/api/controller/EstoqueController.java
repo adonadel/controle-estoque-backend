@@ -156,7 +156,7 @@ public class EstoqueController {
 
     @GetMapping("/movimentacoes")
     @CrossOrigin
-    public ResponseEntity<List<MovimentacaoEstoqueResponse>> carregarMovimentacaoEstoqueById()
+    public ResponseEntity<List<MovimentacaoEstoqueResponse>> carregarMovimentacoes()
     {
         List<MovimentacaoEstoque> retorno = movimentacaoEstoqueRepository.findAll();
 
