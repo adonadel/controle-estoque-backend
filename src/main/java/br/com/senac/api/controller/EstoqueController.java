@@ -46,6 +46,13 @@ public class EstoqueController {
     {
         Estoque retorno = estoqueRepository.save(EstoqueMapper.estoqueRequestToEstoque(estoque));
 
+        MovimentacaoEstoque movimentacaoEstoque = new MovimentacaoEstoque();
+        movimentacaoEstoque.setEstoque(retorno);
+        movimentacaoEstoque.setTipo(TipoMovimentacaoEstoque.ENTRADA);
+        movimentacaoEstoque.setQuantidade(retorno.getQuantidade());
+
+        movimentacaoEstoqueRepository.save(movimentacaoEstoque);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(EstoqueMapper.estoqueToEstoqueResponse(retorno));
     }
 
@@ -131,5 +138,19 @@ public class EstoqueController {
         MovimentacaoEstoque retorno = movimentacaoEstoqueRepository.save(movimentacaoEstoque);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(MovimentacaoEstoqueMapper.movimentacaoEstoqueToMovimentacaoEstoqueResponse(retorno));
+    }
+
+    @GetMapping("/{id}/movimentacoes")
+    @CrossOrigin
+    public ResponseEntity<List<MovimentacaoEstoqueResponse>> carregarMovimentacaoEstoqueById(@PathVariable Long id)
+    {
+        List<MovimentacaoEstoque> retorno = movimentacaoEstoqueRepository.findAllByEstoqueId(id);
+
+        List<MovimentacaoEstoqueResponse> out = retorno
+                .stream()
+                .map(MovimentacaoEstoqueMapper:: movimentacaoEstoqueToMovimentacaoEstoqueResponse)
+                .toList();
+
+        return ResponseEntity.ok().body(out);
     }
 }

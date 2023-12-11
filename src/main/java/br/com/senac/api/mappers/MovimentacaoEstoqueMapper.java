@@ -6,12 +6,13 @@ import br.com.senac.api.entidades.MovimentacaoEstoque;
 
 public class MovimentacaoEstoqueMapper {
 
-    public static MovimentacaoEstoque movimentacaoEstoqueRequestToMovimentacaoEstoque (MovimentacaoEstoqueRequest movimentacaoEstoque)
+    public static MovimentacaoEstoque movimentacaoEstoqueRequestToMovimentacaoEstoque (MovimentacaoEstoque movimentacaoEstoque)
     {
         MovimentacaoEstoque out = new MovimentacaoEstoque();
 
         out.setEstoque(movimentacaoEstoque.getEstoque());
         out.setQuantidade(movimentacaoEstoque.getQuantidade());
+        out.setTipo(movimentacaoEstoque.getTipo());
 
 
         return out;
@@ -21,6 +22,10 @@ public class MovimentacaoEstoqueMapper {
     {
         MovimentacaoEstoqueResponse out = new MovimentacaoEstoqueResponse();
 
+        out.setEstoque(movimentacaoEstoque.getEstoque());
+        out.setQuantidade(movimentacaoEstoque.getQuantidade());
+        out.setTipo(movimentacaoEstoque.getTipo());
+        out.setId(movimentacaoEstoque.getId());
 
 
         return out;

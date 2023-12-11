@@ -1,6 +1,8 @@
 package br.com.senac.api.entidades;
 
+import br.com.senac.api.dto.EstoqueRequest;
 import br.com.senac.api.utils.TipoMovimentacaoEstoque;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,6 +14,7 @@ public class MovimentacaoEstoque {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "estoque_id")
     private Estoque estoque;

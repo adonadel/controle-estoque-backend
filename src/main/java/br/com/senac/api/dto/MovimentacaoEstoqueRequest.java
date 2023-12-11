@@ -6,7 +6,7 @@ import br.com.senac.api.utils.TipoMovimentacaoEstoque;
 public class MovimentacaoEstoqueRequest {
 
     private Long id;
-    private Estoque estoque;
+    private EstoqueRequest estoque;
     private Long quantidade;
     private TipoMovimentacaoEstoque tipo;
 
@@ -18,11 +18,11 @@ public class MovimentacaoEstoqueRequest {
         this.id = id;
     }
 
-    public Estoque getEstoque() {
+    public EstoqueRequest getEstoque() {
         return estoque;
     }
 
-    public void setEstoque(Estoque estoque) {
+    public void setEstoque(EstoqueRequest estoque) {
         this.estoque = estoque;
     }
 
