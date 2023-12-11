@@ -1,5 +1,7 @@
 package br.com.senac.api.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -24,7 +26,7 @@ public class Lojas {
 
     @Column(nullable = false)
     private String endereco;
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "lojas_id")
     private List<Estoque> estoque;

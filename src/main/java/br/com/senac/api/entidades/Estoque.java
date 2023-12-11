@@ -1,6 +1,9 @@
 package br.com.senac.api.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import org.springframework.web.servlet.function.ServerRequest;
 
 import java.util.List;
 
@@ -11,10 +14,12 @@ public class Estoque {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id", scope= ServerRequest.class)
     @ManyToOne
     @JoinColumn(name = "produtos_id")
     private Produtos produto;
 
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id", scope=ServerRequest.class)
     @ManyToOne
     @JoinColumn(name = "lojas_id")
     private Lojas loja;
